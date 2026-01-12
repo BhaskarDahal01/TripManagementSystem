@@ -1,0 +1,33 @@
+body {
+  margin: 0;
+  font-family: Arial;
+}
+
+.nav {
+  background: #0a3d62;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+.nav a {
+  color: white;
+  margin-left: 15px;
+  text-decoration: none;
+}
+.container {
+  padding: 20px;
+}
+button {
+  margin-top: 10px;
+  padding: 6px 12px;
+}
+.modal {
+  background: #eee;
+  padding: 10px;
+  margin-top: 10px;
+}
+.card {
+  background: #ddd;
+  padding: 10px;
+  margin-top: 10px;
+}
