@@ -3,17 +3,41 @@ body {
   font-family: Arial;
 }
 
-.nav {
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
   background: #0a3d62;
-  padding: 10px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  padding: 14px 40px;
 }
-.nav a {
-  color: white;
-  margin-left: 15px;
+
+.logo {
+  color: #fff;
+  font-size: 22px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.nav-links a {
+  color: #fff;
   text-decoration: none;
+  margin-left: 22px;
+  font-size: 15px;
 }
+
+.nav-links a:hover {
+  color: #feca57;
+}
+
+.login-btn {
+  border: 1px solid #feca57;
+  padding: 6px 14px;
+  border-radius: 20px;
+}
+
 .container {
   padding: 20px;
 }
