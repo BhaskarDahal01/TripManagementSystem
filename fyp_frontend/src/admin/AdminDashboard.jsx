@@ -7,37 +7,15 @@ export default function AdminDashboard() {
       name: "Pokhara",
       location: "Pokhara, Nepal",
       time: "3–5 Days",
-      expense: "NPR 20,000 – 40,000"
+      expense: "NPR 20,000 – 40,000",
+      image: null
     },
     {
       name: "Tilicho Lake",
       location: "Manang, Nepal",
       time: "7–10 Days",
-      expense: "NPR 45,000 – 70,000"
-    },
-    {
-      name: "Upper Mustang",
-      location: "Mustang, Nepal",
-      time: "7–9 Days",
-      expense: "NPR 60,000 – 90,000"
-    },
-    {
-      name: "Chitwan National Park",
-      location: "Chitwan, Nepal",
-      time: "2–3 Days",
-      expense: "NPR 15,000 – 30,000"
-    },
-    {
-      name: "Manang",
-      location: "Manang, Nepal",
-      time: "6–8 Days",
-      expense: "NPR 35,000 – 55,000"
-    },
-    {
-      name: "Rara Lake",
-      location: "Mugu, Nepal",
-      time: "7–9 Days",
-      expense: "NPR 50,000 – 80,000"
+      expense: "NPR 45,000 – 70,000",
+      image: null
     }
   ]);
 
@@ -45,7 +23,8 @@ export default function AdminDashboard() {
     name: "",
     location: "",
     time: "",
-    expense: ""
+    expense: "",
+    image: null
   });
 
   const [editIndex, setEditIndex] = useState(null);
@@ -53,14 +32,23 @@ export default function AdminDashboard() {
     name: "",
     location: "",
     time: "",
-    expense: ""
+    expense: "",
+    image: null
   });
 
   /* ADD PLACE */
   const handleAdd = () => {
     if (!form.name) return;
+
     setPlaces([...places, form]);
-    setForm({ name: "", location: "", time: "", expense: "" });
+
+    setForm({
+      name: "",
+      location: "",
+      time: "",
+      expense: "",
+      image: null
+    });
   };
 
   /* DELETE */
@@ -95,21 +83,46 @@ export default function AdminDashboard() {
           value={form.name}
           onChange={(e) => setForm({ ...form, name: e.target.value })}
         />
+
         <input
           placeholder="Location"
           value={form.location}
           onChange={(e) => setForm({ ...form, location: e.target.value })}
         />
+
         <input
           placeholder="Duration"
           value={form.time}
           onChange={(e) => setForm({ ...form, time: e.target.value })}
         />
+
         <input
           placeholder="Expense"
           value={form.expense}
           onChange={(e) => setForm({ ...form, expense: e.target.value })}
         />
+
+        {/* IMAGE UPLOAD FIELD */}
+        <input
+          type="file"
+          accept="image/*"
+          onChange={(e) =>
+            setForm({ ...form, image: e.target.files[0] })
+          }
+        />
+
+        {/* IMAGE PREVIEW */}
+        {form.image && (
+          <img
+            src={URL.createObjectURL(form.image)}
+            alt="Preview"
+            style={{
+              width: "150px",
+              marginTop: "10px",
+              borderRadius: "8px"
+            }}
+          />
+        )}
 
         <button onClick={handleAdd}>Add Place</button>
       </div>
@@ -129,22 +142,37 @@ export default function AdminDashboard() {
                     setEditForm({ ...editForm, name: e.target.value })
                   }
                 />
+
                 <input
                   value={editForm.location}
                   onChange={(e) =>
                     setEditForm({ ...editForm, location: e.target.value })
                   }
                 />
+
                 <input
                   value={editForm.time}
                   onChange={(e) =>
                     setEditForm({ ...editForm, time: e.target.value })
                   }
                 />
+
                 <input
                   value={editForm.expense}
                   onChange={(e) =>
                     setEditForm({ ...editForm, expense: e.target.value })
+                  }
+                />
+
+                {/* EDIT IMAGE */}
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) =>
+                    setEditForm({
+                      ...editForm,
+                      image: e.target.files[0]
+                    })
                   }
                 />
 
@@ -164,13 +192,30 @@ export default function AdminDashboard() {
               /* VIEW MODE */
               <>
                 <div>
+                  {p.image && (
+                    <img
+                      src={URL.createObjectURL(p.image)}
+                      alt={p.name}
+                      style={{
+                        width: "120px",
+                        borderRadius: "8px",
+                        marginBottom: "8px"
+                      }}
+                    />
+                  )}
+
                   <strong>{p.name}</strong>
                   <p>{p.location}</p>
-                  <small>{p.time} | {p.expense}</small>
+                  <small>
+                    {p.time} | {p.expense}
+                  </small>
                 </div>
 
                 <div className="admin-actions">
-                  <button className="edit" onClick={() => handleEdit(index)}>
+                  <button
+                    className="edit"
+                    onClick={() => handleEdit(index)}
+                  >
                     Edit
                   </button>
                   <button
